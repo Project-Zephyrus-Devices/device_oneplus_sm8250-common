@@ -57,6 +57,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
+    audio_amplifier.kona \
     audio.bluetooth.default \
     audio.primary.kona \
     audio.r_submix.default \
@@ -68,7 +69,6 @@ PRODUCT_PACKAGES += \
     libaudiopreprocessing \
     libbatterylistener \
     libbundlewrapper \
-    libcirrusspkrprot \
     libcomprcapture \
     libdownmix \
     libdynproc \
