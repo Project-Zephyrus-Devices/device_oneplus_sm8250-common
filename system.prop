@@ -15,6 +15,7 @@ use.voice.path.for.pcm.voip=true
 # Bluetooth
 persist.vendor.bt.a2dp.aac_whitelist=false
 persist.vendor.btstack.enable.lpa=true
+persist.vendor.btstack.enable.twsplus=true
 ro.bluetooth.library_name=libbluetooth_qti.so
 
 # Charger
