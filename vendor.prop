@@ -133,10 +133,9 @@ vendor.opengles.version=196610
 ro.incremental.enable=1
 
 # Media
-debug.stagefright.ccodec=0
-vendor.media.vpp.enable=0
-vendor.media.vpp.osie.enable=0
-vendor.media.vpp.sr.enable=0
+debug.media.codec2=2
+debug.stagefright.ccodec=4
+debug.stagefright.omx_default_rank=512
 
 # NFC
 vendor.qti.nfc.chipid=0x51
