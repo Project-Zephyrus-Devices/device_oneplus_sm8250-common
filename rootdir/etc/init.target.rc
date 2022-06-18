@@ -156,15 +156,6 @@ on boot
     chmod 0666 /sys/class/drm/card0-DSI-1/dimlayer_bl_en
     chmod 0666 /sys/class/drm/card0-DSI-1/dither_en
 
-# v-takey.zheng@SYSTEM, 2020/06/03 Add for oemlogkit camera log
-    chmod 0666 /sys/module/cam_debug_util/parameters/debug_mdl
-
-# ifdef VENDOR_EDIT
-# travis.oyang@OPTI, 2020/9/5, Add server for modem sleep info service.
-chown system system /proc/rpmh_modem/sleepinfo
-chmod 0660 /proc/rpmh_modem/sleepinfo
-# endif /* VENDOR_EDIT */
-
 on property:vendor.display.lcd_density=560
    setprop dalvik.vm.heapgrowthlimit 256m
 
@@ -219,43 +210,11 @@ service vendor.mdm_launcher /vendor/bin/sh /vendor/bin/init.mdm.sh
     class core
     oneshot
 
-# ifdef VENDOR_EDIT
-# travis.oyang@OPTI, 2020/9/3, Add server for modem sleep info service.
-service qmi_master_stats_service /vendor/bin/qmi-framework-tests/qmi_master_stats_service
-    class main
-    user system
-    group system
-    disabled
-    oneshot
-# endif /* VENDOR_EDIT */
-
 on property:init.svc.vendor.per_mgr=running
     start vendor.per_proxy
 
 on property:sys.shutdown.requested=*
     stop vendor.per_proxy
-
-#rowan.jia@MM.Display, 2020/02/11, add for ltm licenses
-#ifdef/* VENDOR_EDIT */
-on property:sys.boot_completed=1
-    copy /vendor/etc/OnePlus_QC_LTM_Commercial_SM8250_2020_02_07.pfm /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-2013248336.pfm
-    chmod 0600 /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-2013248336.pfm
-    chown system system /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-2013248336.pfm
-#endif /* VENDOR_EDIT */
-
-#yuquan.fei@yuquan.fei, 2020/07/29, use cnss_diag to grab WiFi log
-#ifdef/* VENDOR_EDIT */
-#on property:vold.decrypt=trigger_restart_framework
-#   start vendor.cnss_diag
-#endif /* VENDOR_EDIT */
-
-
-service vendor.cnss_diag /system/vendor/bin/cnss_diag -q -f -b 128 -t HELIUM
-   class main
-   user system
-   group system wifi inet sdcard_rw media_rw diag
-   disabled
-   oneshot
 
 service dcvs-sh /vendor/bin/init.qti.dcvs.sh
     class late_start
@@ -266,13 +225,6 @@ service dcvs-sh /vendor/bin/init.qti.dcvs.sh
 
 on property:vendor.dcvs.prop=1
    start dcvs-sh
-
-# ifdef VENDOR_EDIT
-# george.yi, 2020/3/24, [OSP-4664] add for oemlogkit pull xlog to sdcard
-on property:persist.sys.oemlog.pullxlog=true
-   exec u:r:installd:s0 -- /system_ext/bin/pull_xlog.sh
-   setprop persist.sys.oemlog.pullxlog false
-# endif  /* VENDOR_EDIT */
 
 on property:ro.boot.project_codename=instantnoodle
     setprop persist.radio.multisim.config dsds
