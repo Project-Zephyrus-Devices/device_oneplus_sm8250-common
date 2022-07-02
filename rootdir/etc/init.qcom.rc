@@ -26,7 +26,6 @@
 #
 
 import /vendor/etc/init/hw/init.qcom.usb.rc
-import /vendor/etc/init/hw/init.qcom.power.rc
 import /vendor/etc/init/hw/init.target.rc
 import /odm/etc/init/hw/init.oppo.display.rc
 import /odm/etc/init/init.oplus.sensor.rc
@@ -348,6 +347,9 @@ on post-fs-data
     chmod 0770 /data/vendor/fm
 
     mkdir /data/vendor/secure_element 0777 system system
+
+    #Create IOP  deamon related dirs
+    mkdir /data/vendor/iop 0700 root system
 
     # Mark the copy complete flag to not completed
     write /data/vendor/radio/copy_complete 0

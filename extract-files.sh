@@ -60,11 +60,18 @@ fi
 
 function blob_fixup() {
     case "${1}" in
-        odm/lib64/libgf_hal_G3.so)
-            sed -i "s|ro.boot.flash.locked|vendor.flash.locked\x00|" "${2}"
+        product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml)
+            sed -i "s/\/my_product/\/product/" "${2}"
+            ;;
+        system_ext/lib64/libwfdnative.so)
+            sed -i "s/android.hidl.base@1.0.so/libhidlbase.so\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00/" "${2}"
+            ;;
+        vendor/lib64/hw/com.qti.chi.override.so)
+            "${SIGSCAN}" -p "EF 2A 04 94" -P "1F 20 03 D5" -f "${2}"
+            "${SIGSCAN}" -p "9A 22 04 94" -P "1F 20 03 D5" -f "${2}"
             ;;
         vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so)
-            "${SIGSCAN}" -p "AB 0B 00 94" -P "1F 20 03 D5" -f "${2}"
+            "${SIGSCAN}" -p "1F 0A 00 94" -P "1F 20 03 D5" -f "${2}"
             ;;
     esac
 }
