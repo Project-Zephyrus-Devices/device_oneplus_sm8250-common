@@ -29,13 +29,7 @@
 # Below macro will be read by uevent and path will
 # be added to search path for firmware loading
 
-# ifndef OPLUS_FEATURE_WIFI_BDF
-# WuGuotian@CONNECTIVITY.WIFI.HARDWARE.BDF.1065227 , 2021/05/26,
-# Modify for: multi projects using different bdf, adding persist into firmware_directories
-# firmware_directories /vendor/firmware_mnt/image/
-# else /* OPLUS_FEATURE_WIFI_BDF */
 firmware_directories /mnt/vendor/persist/copy/ /mnt/vendor/persist/ /odm/etc/wifi/ /vendor/firmware_mnt/image/
-# endif /* OPLUS_FEATURE_WIFI_BDF */
 
 # the DIAG device node is not world writable/readable.
 /dev/diag                 0660   system     oem_2901
