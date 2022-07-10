@@ -485,26 +485,16 @@ odm/bin/hw/vendor.oplus.hardware.biometrics.fingerprint@2.1-service
 odm/bin/init.oplus.fingerprints.sh
 odm/etc/init/vendor.oplus.hardware.biometrics.fingerprint@2.1-service.rc
 odm/etc/vintf/manifest/manifest_oplus_fingerprint.xml
-odm/lib64/hw/fingerprint.18821_goodix9508_G2_4.default.so
-odm/lib64/hw/fingerprint.18857_goodix9508_G2_4.default.so
-odm/lib64/hw/fingerprint.18865_goodix9558_G3.default.so
 odm/lib64/hw/fingerprint.19805_goodix9638_G6_3.default.so
 odm/lib64/hw/fingerprint.19805_goodix9678_G6_7.default.so
 odm/lib64/hw/fingerprint.19811_goodix9638_G6.default.so
-odm/lib64/hw/fingerprint.20801_goodix9558_G3.default.so
 odm/lib64/hw/fingerprint.20828_goodix9678.default.so
-odm/lib64/hw/fingerprint.goodix9608_G5.default.so
 odm/lib64/hw/fingerprint.goodix9638_G6.default.so
 odm/lib64/libgf_hal_19805_G6_3_oplus.so
 odm/lib64/libgf_hal_19805_G6_7_oplus.so
 odm/lib64/libgf_hal_19811_G6_oplus.so
 odm/lib64/libgf_hal_20828_G6_7_oplus.so
-odm/lib64/libgf_hal_G5_oplus.so
 odm/lib64/libgf_hal_G6_oplus.so
-odm/lib64/libgf_ud_hal_18821_G2_4_oplus.so
-odm/lib64/libgf_ud_hal_18857_G2_4_oplus.so
-odm/lib64/libgf_ud_hal_18865_G3_oplus.so
-odm/lib64/libgf_ud_hal_20801_G3_oplus.so
 odm/lib64/vendor.oplus.hardware.commondcs@1.0.so
 
 # Gatekeeper

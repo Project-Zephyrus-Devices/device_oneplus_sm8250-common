@@ -99,7 +99,6 @@ drm.service.enabled=true
 
 # Fingerprint
 persist.vendor.qfp=true
-vendor.flash.locked=0
 
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
