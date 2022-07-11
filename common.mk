@@ -333,6 +333,12 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
+PRODUCT_PACKAGES += \
+    TelephonyResCommon \
+    WifiResCommon \
+    OPlusWifiResCommon \
+    WifiResTarget
+
 # Partition
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
