@@ -328,20 +328,10 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-zep
+    $(LOCAL_PATH)/overlay-zep \
+    $(LOCAL_PATH)/overlay
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
-PRODUCT_PACKAGES += \
-    FrameworksResCommon \
-    SystemUIResCommon \
-    TelephonyResCommon \
-    WifiResCommon \
-    CarrierConfigResCommon \
-    FrameworksResTarget \
-    OPlusFrameworksResCommon \
-    OPlusSettingsResCommon \
-    OPlusWifiResCommon \
-    WifiResTarget
 
 # Partition
 PRODUCT_BUILD_SUPER_PARTITION := false
