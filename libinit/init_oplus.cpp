@@ -34,18 +34,139 @@ void OverrideProperty(const char* name, const char* value) {
  */
 void vendor_load_properties() {
     auto prj_version = std::stoi(GetProperty("ro.boot.prj_version", "0"));
+    auto rf_version = std::stoi(GetProperty("ro.boot.rf_version", "0"));
 
     switch (prj_version) {
-        case 20828: // OnePlus 9R
-            OverrideProperty("ro.product.model", "LE2101");
-            break;
-        case 19805: // OnePlus 8T
-            OverrideProperty("ro.product.model", "OnePlus 8T");
-            break;
-        case 20809: // OnePlus 8T T-Mobile
-            OverrideProperty("ro.product.model", "OnePlus 8T");
-            break;
+        case 19821:
+      /* OnePlus 8 */
+      switch (rf_version){
+        case 11:
+          /* China */
+          OverrideProperty("ro.product.model", "IN2010");
+          break;
+        case 13:
+          /* India */
+          OverrideProperty("ro.product.model", "IN2011");
+          break;
+        case 14:
+          /* Europe */
+          OverrideProperty("ro.product.model", "IN2013");
+          break;
+        case 15:
+          /* Global / US Unlocked */
+          OverrideProperty("ro.product.model", "IN2015");
+          break;
         default:
-            LOG(ERROR) << "Unexpected project version: " << prj_version;
+          /* Generic */
+          OverrideProperty("ro.product.model", "IN2015");
+          break;
+      }
+      break;
+    case 19855:
+      /* OnePlus 8 T-Mobile */
+      switch (rf_version){
+        case 12:
+          /* T-Mobile */
+          OverrideProperty("ro.product.model", "IN2017");
+          break;
+        default:
+          /* Generic */
+          OverrideProperty("ro.product.model", "IN2015");
+          break;
+      }
+      break;
+    case 19867:
+      /* OnePlus 8 Verizon */
+      switch (rf_version){
+        case 25:
+          /* Verizon */
+          OverrideProperty("ro.product.model", "IN2019");
+          break;
+        default:
+          /* Generic */
+          OverrideProperty("ro.product.model", "IN2015");
+          break;
+      }
+      break;
+    case 19811:
+      /* OnePlus 8 Pro */
+      switch (rf_version){
+        case 11:
+          /* China */
+          OverrideProperty("ro.product.model", "IN2020");
+          break;
+        case 13:
+          /* India */
+          OverrideProperty("ro.product.model", "IN2021");
+          break;
+        case 14:
+          /* Europe */
+          OverrideProperty("ro.product.model", "IN2023");
+          break;
+        case 15:
+          /* Global / US Unlocked */
+          OverrideProperty("ro.product.model", "IN2025");
+          break;
+        default:
+          /* Generic */
+          OverrideProperty("ro.product.model", "IN2025");
+          break;
+      }
+      break;
+      case 19805:
+      /* OnePlus 8T */
+      switch (rf_version){
+        case 11:
+          /* China */
+          OverrideProperty("ro.product.model", "KB2000");
+          break;
+        case 13:
+          /* India */
+          OverrideProperty("ro.product.model", "KB2001");
+          break;
+        case 14:
+          /* Europe */
+          OverrideProperty("ro.product.model", "KB2003");
+          break;
+        case 15:
+          /* Global / US Unlocked */
+          OverrideProperty("ro.product.model", "KB2005");
+          break;
+        default:
+          /* Generic */
+          OverrideProperty("ro.product.model", "KB2005");
+          break;
+      }
+      break;
+    case 20809:
+      /* OnePlus 8T T-Mobile */
+      switch (rf_version){
+        case 12:
+          /* T-Mobile */
+          OverrideProperty("ro.product.model", "KB2007");
+          break;
+        default:
+          /* Generic */
+          OverrideProperty("ro.product.model", "KB2005");
+          break;
+      }
+      break;
+     case 20828:
+      /* OnePlus 9R */
+      switch (rf_version){
+      case 11:
+          /* China */
+          OverrideProperty("ro.product.model", "LE2100");
+          break;
+      case 13:
+          /* India */
+          OverrideProperty("ro.product.model", "LE2101");
+          break;
+      default:
+          /* Generic */
+          OverrideProperty("ro.product.model", "LE2101");
+          break;
+      }
+      break;
     }
 }
