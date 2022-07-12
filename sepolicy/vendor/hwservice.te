@@ -7,6 +7,9 @@ type hal_charger_oplus_hwservice, hwservice_manager_type;
 # CommonDcs
 type hal_commondcs_oplus_hwservice, hwservice_manager_type;
 
+# Dolby
+type hal_dms_hwservice, hwservice_manager_type;
+
 # Fingerprint
 type hal_fingerprint_oplus_hwservice, hwservice_manager_type;
 

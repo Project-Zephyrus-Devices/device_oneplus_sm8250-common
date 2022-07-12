@@ -9,6 +9,9 @@ vendor.oplus.hardware.charger::ICharger                                       u:
 # CommonDcs
 vendor.oplus.hardware.commondcs::ICommonDcsHalService                         u:object_r:hal_commondcs_oplus_hwservice:s0
 
+# Dolby
+vendor.dolby.hardware.dms::IDms                                            u:object_r:hal_dms_hwservice:s0
+
 # Fingerprint
 vendor.oplus.hardware.biometrics.fingerprint::IBiometricsFingerprint          u:object_r:hal_fingerprint_oplus_hwservice:s0
 
