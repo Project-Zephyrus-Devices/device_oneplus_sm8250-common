@@ -145,7 +145,7 @@ if [ -d /config/usb_gadget ]; then
 	machine_type=`cat /sys/devices/soc0/machine`
 
 #ifdef OPLUS_FEATURE_CHG_BASIC /* tongfeng.Huang@BSP.CHG.Basic, 2019/04/18,  Modify for USB */
-	product_string=`getprop ro.vendor.oplus.market.name`
+	product_string=`getprop ro.vendor.usb.name`
 #else
 	#setprop vendor.usb.product_string "$machine_type-$soc_hwplatform _SN:$msm_serial_hex"
 #endif

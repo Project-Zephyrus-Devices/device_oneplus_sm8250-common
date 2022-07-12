@@ -38,6 +38,7 @@ void vendor_load_properties() {
 
     switch (prj_version) {
         case 19821:
+        OverrideProperty("ro.vendor.usb.name", "OnePlus 8");
       /* OnePlus 8 */
       switch (rf_version){
         case 11:
@@ -63,6 +64,7 @@ void vendor_load_properties() {
       }
       break;
     case 19855:
+    OverrideProperty("ro.vendor.usb.name", "OnePlus 8");
       /* OnePlus 8 T-Mobile */
       switch (rf_version){
         case 12:
@@ -76,6 +78,7 @@ void vendor_load_properties() {
       }
       break;
     case 19867:
+    OverrideProperty("ro.vendor.usb.name", "OnePlus 8");
       /* OnePlus 8 Verizon */
       switch (rf_version){
         case 25:
@@ -89,6 +92,7 @@ void vendor_load_properties() {
       }
       break;
     case 19811:
+    OverrideProperty("ro.vendor.usb.name", "OnePlus 8 Pro");
       /* OnePlus 8 Pro */
       switch (rf_version){
         case 11:
@@ -114,6 +118,7 @@ void vendor_load_properties() {
       }
       break;
       case 19805:
+      OverrideProperty("ro.vendor.usb.name", "OnePlus 8T");
       /* OnePlus 8T */
       switch (rf_version){
         case 11:
@@ -139,6 +144,7 @@ void vendor_load_properties() {
       }
       break;
     case 20809:
+    OverrideProperty("ro.vendor.usb.name", "OnePlus 8T");
       /* OnePlus 8T T-Mobile */
       switch (rf_version){
         case 12:
@@ -153,6 +159,7 @@ void vendor_load_properties() {
       break;
      case 20828:
       /* OnePlus 9R */
+      OverrideProperty("ro.vendor.usb.name", "OnePlus 9R");
       switch (rf_version){
       case 11:
           /* China */
