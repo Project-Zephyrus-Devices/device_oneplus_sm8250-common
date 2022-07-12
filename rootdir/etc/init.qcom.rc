@@ -75,6 +75,9 @@ on init
     write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
+    
+    # Vibration intensity
+    chown system system /sys/class/leds/vibrator/level
 
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
@@ -229,6 +232,18 @@ on boot
 
     # limit discard size to 128MB in order to avoid long IO latency
     write /sys/block/sda/queue/discard_max_bytes 134217728
+
+    # Force Game Mode
+    chown system system /proc/touchpanel/game_switch_enable
+    chmod 0666 /proc/touchpanel/game_switch_enable
+    
+    # Edge touch
+    chown system system /proc/touchpanel/oplus_tp_limit_enable
+    chmod 0666 /proc/touchpanel/oplus_tp_limit_enable
+
+    # Measured FPS
+    chown system graphics /sys/class/drm/sde-crtc-0/measured_fps
+    chmod 0666 /sys/class/drm/sde-crtc-0/measured_fps
 
 on property:sys.boot_completed=1
     copy /vendor/etc/Oppo_QC_LTM_Commercial_2020_01_03.pfm /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-958228818.pfm

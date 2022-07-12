@@ -1,0 +1,3 @@
+-keep class org.zephyrus.device.DeviceExtras.* {
+  *;
+}

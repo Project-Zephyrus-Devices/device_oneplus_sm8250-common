@@ -31,3 +31,9 @@ type vendor_proc_fingerprint, fs_type, proc_type;
 
 # Version
 type vendor_proc_oplusversion, fs_type, proc_type;
+
+# tri-state-key
+type proc_tri_state_key, fs_type, proc_type;
+
+# RIL
+type proc_rild, fs_type, proc_type;
