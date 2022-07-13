@@ -392,12 +392,10 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
-    libOmxCore \
     libOmxEvrcEnc \
     libOmxG711Enc \
     libOmxQcelp13Enc \
     libOmxVdec \
-    libOmxVenc \
     libstagefrighthw
 
 # Overlays
