@@ -373,14 +373,15 @@ int LedVibratorDevice::write_value(const char *file, int value) {
 
 int LedVibratorDevice::on(int32_t timeoutMs) {
     int ret = 0;
-    if (timeoutMs <= 12) {
-        ret |= onWaveform(7);
-    } else if (timeoutMs <= 52) {
+    if (timeoutMs <= 10) {
+        ret |= onWaveform(1);
+    } else if (timeoutMs <= 50) {
         ret |= onWaveform(2);
-    } else if (timeoutMs <= 102) {
-        ret |= onWaveform(6);
+    } else if (timeoutMs <= 99) {
+        ret |= onWaveform(3);
     } else {
         ret |= write_value(LED_DEVICE "/duration", timeoutMs);
+        ret |= write_value(LED_DEVICE "/gain", "0x60");
         ret |= write_value(LED_DEVICE "/state", "1");
         ret |= write_value(LED_DEVICE "/activate", "1");
         ret |= write_value(LED_DEVICE "/activate", "0");
@@ -391,7 +392,8 @@ int LedVibratorDevice::on(int32_t timeoutMs) {
 int LedVibratorDevice::onWaveform(int waveformIndex) {
     int ret = 0;
     ret |= write_value(LED_DEVICE "/rtp", "0");
-    ret |= write_value(LED_DEVICE "/vmax", "1600");
+    ret |= write_value(LED_DEVICE "/vmax", "0x16");
+    ret |= write_value(LED_DEVICE "/gain", "0x77");
     ret |= write_value(LED_DEVICE "/waveform_index", waveformIndex);
     ret |= write_value(LED_DEVICE "/brightness", "1");
     ret |= write_value(LED_DEVICE "/rtp", "0");
@@ -478,31 +480,52 @@ ndk::ScopedAStatus Vibrator::perform(Effect effect, EffectStrength es, const std
     if (ledVib.mDetected) {
         switch (effect) {
         case Effect::CLICK:
-            ledVib.write_value(LED_DEVICE "/rtp", "0");
-            ledVib.write_value(LED_DEVICE "/vmax", "1600");
-            ledVib.write_value(LED_DEVICE "/waveform_index", "1");
+            ledVib.write_value(LED_DEVICE "/duration", "10");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
             ledVib.write_value(LED_DEVICE "/brightness", "1");
-            ledVib.write_value(LED_DEVICE "/rtp", "0");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x03");
             break;
         case Effect::DOUBLE_CLICK:
-            ledVib.write_value(LED_DEVICE "/duration", "30");
-            ledVib.write_value(LED_DEVICE "/state", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "0");
-            usleep(150 * 1000);
-            ledVib.write_value(LED_DEVICE "/duration", "30");
-            ledVib.write_value(LED_DEVICE "/state", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "0");
+            ledVib.write_value(LED_DEVICE "/duration", "13");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
+            ledVib.write_value(LED_DEVICE "/brightness", "1");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x05");
+            usleep(100 * 1000);
+            ledVib.write_value(LED_DEVICE "/duration", "13");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
+            ledVib.write_value(LED_DEVICE "/brightness", "1");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x05");
             break;
         case Effect::HEAVY_CLICK:
-            ledVib.write_value(LED_DEVICE "/duration", "1");
-            ledVib.write_value(LED_DEVICE "/state", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "1");
-            ledVib.write_value(LED_DEVICE "/duration", "24");
-            ledVib.write_value(LED_DEVICE "/state", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "1");
-            ledVib.write_value(LED_DEVICE "/activate", "0");
+            ledVib.write_value(LED_DEVICE "/duration", "10");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
+            ledVib.write_value(LED_DEVICE "/brightness", "1");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x03");
+            break;
+        case Effect::TICK:
+            ledVib.write_value(LED_DEVICE "/duration", "30");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
+            ledVib.write_value(LED_DEVICE "/brightness", "1");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x03");
+            break;
+        case Effect::THUD:
+            ledVib.write_value(LED_DEVICE "/duration", "40");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
+            ledVib.write_value(LED_DEVICE "/brightness", "1");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x03");
+            break;
+        case Effect::POP:
+            ledVib.write_value(LED_DEVICE "/duration", "13");
+            ledVib.write_value(LED_DEVICE "/vmax", "0x16");
+            ledVib.write_value(LED_DEVICE "/gain", "0x77");
+            ledVib.write_value(LED_DEVICE "/brightness", "1");
+            ledVib.write_value(LED_DEVICE "/seq", "0x00 0x03");
             break;
         default:
             return ndk::ScopedAStatus(AStatus_fromExceptionCode(EX_UNSUPPORTED_OPERATION));
@@ -541,16 +564,14 @@ ndk::ScopedAStatus Vibrator::perform(Effect effect, EffectStrength es, const std
 }
 
 ndk::ScopedAStatus Vibrator::getSupportedEffects(std::vector<Effect>* _aidl_return) {
-    if (ledVib.mDetected) {
-        *_aidl_return = {Effect::CLICK, Effect::DOUBLE_CLICK, Effect::HEAVY_CLICK};
-    } else {
+     if (ledVib.mDetected) {
+        *_aidl_return = {Effect::CLICK, Effect::DOUBLE_CLICK, Effect::TICK, Effect::THUD,
+                         Effect::POP, Effect::HEAVY_CLICK};
+     } else {
 #ifdef TARGET_SUPPORTS_OFFLOAD
         *_aidl_return = {Effect::CLICK, Effect::DOUBLE_CLICK, Effect::TICK, Effect::THUD,
                          Effect::POP, Effect::HEAVY_CLICK, Effect::RINGTONE_12,
                          Effect::RINGTONE_13, Effect::RINGTONE_14, Effect::RINGTONE_15};
-#else
-        *_aidl_return = {Effect::CLICK, Effect::DOUBLE_CLICK, Effect::TICK, Effect::THUD,
-                         Effect::POP, Effect::HEAVY_CLICK};
 #endif
     }
     return ndk::ScopedAStatus::ok();
